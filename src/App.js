@@ -1,23 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import {  BrowserRouter,  Routes,  Route,  Link} from"react-router-dom"
+import Customer from ".//components/Customer.js"
+import Trainings from ".//components/Trainings.js"
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6">
+            Training Centre
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <BrowserRouter>
+        <Link to="/customers">Customer</Link>{' '}
+        <Link to="/trainings">Trainings</Link>{' '}
+        <Routes>
+          <Route path="/customers"element={<Customer />} />
+          <Route path="/trainings"element={<Trainings />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
