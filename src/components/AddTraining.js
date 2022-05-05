@@ -1,19 +1,20 @@
 import React from "react"
 import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
+import IconButton from "@mui/material/IconButton"
+import AddIcon from "@mui/icons-material/Add"
 import Dialog from "@mui/material/Dialog"
 import DialogActions from "@mui/material/DialogActions"
 import DialogContent from "@mui/material/DialogContent"
 import DialogTitle from "@mui/material/DialogTitle"
 
-function AddTraining({ addTraining }){
+function AddTraining(){
 
     const [open, setOpen] = React.useState(false)
 	const [training, setTraining] = React.useState({
         date: "",
         duration: "",
         activity: "",
-        customer: "",
     })
 
     const handleClickOpen = () => {
@@ -24,6 +25,21 @@ function AddTraining({ addTraining }){
         setOpen(false)
     }
 
+    const addTraining = (training) => {
+		fetch("https://customerrest.herokuapp.com/api/trainings",{
+			method: "POST",
+			headers: {"Content-type": "application/json"},
+			body: JSON.stringify(training)
+		})
+		.then(response => {
+			if (response.ok){
+			}else{
+				alert("training could not be added")
+			}
+		})
+		.catch(err => console.error(err))
+	}
+
     const handleSave = () => {
         addTraining(training)
         setOpen(false)
@@ -31,7 +47,6 @@ function AddTraining({ addTraining }){
 			date: "",
 			duration: "",
 			activity: "",
-			customer: "",
         })
     }
 
@@ -41,11 +56,11 @@ function AddTraining({ addTraining }){
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
-                Add training
-            </Button>
+            <IconButton onClick={handleClickOpen}>
+                <AddIcon color="success" />
+            </IconButton>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>New Customer</DialogTitle>
+                <DialogTitle>New training</DialogTitle>
                 <DialogContent>
                 <TextField
                     name="date"
@@ -71,15 +86,6 @@ function AddTraining({ addTraining }){
                     onChange={inputChanged}
                     margin="dense"
                     label="Activity"
-                    fullWidth
-                    variant="standard"
-                />
-                <TextField
-                    name="customer"
-                    value={training.customer}
-                    onChange={inputChanged}
-                    margin="dense"
-                    label="Customer"
                     fullWidth
                     variant="standard"
                 />

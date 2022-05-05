@@ -5,6 +5,8 @@ import DeleteIcon from "@mui/icons-material/Delete"
 import Snackbar from "@mui/material/Snackbar"
 import AddCustomer from "./AddCustomer"
 import EditCustomer from "./EditCustomer"
+import AddTraining from "./AddTraining"
+import { enrichId } from "./Helpers"
 
 import "ag-grid-community/dist/styles/ag-grid.css"
 import "ag-grid-community/dist/styles/ag-theme-material.css"
@@ -22,7 +24,7 @@ function Customer(){
 	const fetchCustomers = () => {
 		fetch("https://customerrest.herokuapp.com/api/customers")
 		.then(response => response.json())
-		.then(data => setCustomers(data.content))
+		.then(data => setCustomers(enrichId(data.content)))
 	}
 
 	const deleteCustomer = (url) => {
@@ -78,10 +80,16 @@ function Customer(){
 		{field: "firstname", sortable: true, filter: true},
 		{field: "lastname", sortable: true, filter: true},
 		{field: "streetaddress", sortable: true, filter: true},
-		{field: "postcode", sortable: true, filter: true, width: 120},
-		{field: "city", sortable: true, filter: true, width: 120},
-		{field: "email", sortable: true, filter: true, width: 120},
-		{field: "phone", sortable: true, filter: true, width: 120},
+		{field: "postcode", sortable: true, filter: true},
+		{field: "city", sortable: true, filter: true},
+		{field: "email", sortable: true, filter: true,},
+		{field: "phone", sortable: true, filter: true,},
+		{
+			headerName: "",
+			width: 200,
+			field: "",
+			cellRenderer: params => <AddTraining customerId={params.data.self_id} />
+		},
 		{
 			headerName: "",
 			width: 100,
@@ -103,6 +111,7 @@ function Customer(){
 	return(
 		<>
 			<AddCustomer addCustomer={addCustomer} />
+			
 			<div className="ag-theme-material" style={{height: 600, width: "90%"}}>
 				<AgGridReact 
 					columnDefs={columns}
