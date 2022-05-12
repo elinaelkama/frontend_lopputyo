@@ -23,8 +23,26 @@ function Customer(){
 
 	const fetchCustomers = () => {
 		fetch("https://customerrest.herokuapp.com/api/customers")
-		.then(response => response.json())
-		.then(data => setCustomers(enrichId(data.content)))
+			.then(response => response.json())
+			.then(data => setCustomers(enrichId(data.content)))
+	}
+
+	const downloadCsv = () => {
+		const csvRows = customers.map(({firstname, lastname, streetaddress, postcode, city, email, phone}) => [
+			firstname, lastname, streetaddress, postcode, city, email, phone
+		])
+		csvRows.unshift(["Firstname", "Lastname", "Street address", "Postcode", "City", "Email", "Phone number"])
+		const csv = csvRows.map(row => row.join(",")).join("\n")
+		
+		const blob = new Blob([csv], { type: 'text/csv' });
+		const url = window.URL.createObjectURL(blob)
+		const a = document.createElement('a')
+	
+		a.setAttribute('href', url)
+	
+		a.setAttribute('download', 'customers.csv');
+	
+		a.click()
 	}
 
 	const deleteCustomer = (url) => {
@@ -111,7 +129,7 @@ function Customer(){
 	return(
 		<>
 			<AddCustomer addCustomer={addCustomer} />
-			
+			<button  onClick={downloadCsv}>CSV</button>
 			<div className="ag-theme-material" style={{height: 600, width: "90%"}}>
 				<AgGridReact 
 					columnDefs={columns}

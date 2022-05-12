@@ -4,6 +4,7 @@ import IconButton from "@mui/material/IconButton"
 import DeleteIcon from "@mui/icons-material/Delete"
 
 
+
 import "ag-grid-community/dist/styles/ag-grid.css"
 import "ag-grid-community/dist/styles/ag-theme-material.css"
 
@@ -17,11 +18,9 @@ function Trainings(){
 
 	const fetchTrainings = () => {
 		fetch("https://customerrest.herokuapp.com/api/trainings")
-		.then(response => response.json())
-		.then(data => setTrainings(data.content))
+			.then(response => response.json())
+			.then(data => setTrainings(data.content))
 	}
-
-	
 
 	const deleteTrainings = (url) => {
 		if (window.confirm("Are you sure?")){
