@@ -1,11 +1,11 @@
-/*import React, { useState, useEffect } from "react"
-import { Calendar as BigCalendar, momentLocalizer } from 'react-big-calendar'
+import React, { useState, useEffect } from "react"
+/*import { Calendar as BigCalendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 
-import "react-big-calendar/lib/css/react-big-calendar.css"
+import "react-big-calendar/lib/css/react-big-calendar.css"*/
 
 function Calendar(){
-	const [trainings, setTrainings] = useState([])
+	/*const [trainings, setTrainings] = useState([])
 	const [participants, setParticipants] = useState({})
 	const [events, setEvents] = useState([])
 
@@ -44,17 +44,20 @@ function Calendar(){
 		}))
 	}, [trainings, participants, events])
 
-	const localizer = momentLocalizer(moment)
+	const localizer = momentLocalizer(moment)*/
 
 	return (
-		<BigCalendar
+		/*<BigCalendar
 			localizer={localizer}
 			events={events}
 			startAccessor="start"
 			endAccessor="end"
 			style={{ height: "90vh" }}
-   		 />
+   		 />*/
+		<div>
+			<h1>Tässä näkyisi kalenteri, jos Herokun buildi toimisi</h1>
+		</div>
 	)
 }
 
-export default Calendar*/
+export default Calendar
