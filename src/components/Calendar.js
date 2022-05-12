@@ -23,6 +23,7 @@ function Calendar(){
 			fetch(url).then(response => response.json()).then(({firstname, lastname}) => {
 				fetches[url] = `${firstname} ${lastname}`
 			})
+			return training
 		})
 		setParticipants(fetches)
 	}, [trainings])
