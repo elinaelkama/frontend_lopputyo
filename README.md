@@ -1,5 +1,5 @@
 # About
-Tämä on Haaga-Helian Fron end -kurssin lopputyö.
+Tämä on Haaga-Helian Front end -kurssin lopputyö, joka on tehty käyttäen Reactia.
 
 ## Demo
 https://frontti-lopputyo.herokuapp.com/
